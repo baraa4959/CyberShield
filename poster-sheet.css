@@ -826,3 +826,29 @@ body:has(.shell-poster),
 .sheet-landscape[dir="ltr"] .sheet-action {
   font-size: 12.7px;
 }
+
+/* Portrait infographic: preserve all sections inside the 720x1280 canvas.
+   Content is scaled uniformly only when its natural height requires it. */
+.sheet-main-content {
+  display: contents;
+}
+.poster-sheet.sheet-portrait .sheet-main-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 0 0 auto;
+  transform-origin: top right;
+}
+.poster-sheet.sheet-portrait[dir="ltr"] .sheet-main-content {
+  transform-origin: top left;
+}
+.poster-sheet.sheet-portrait[dir="rtl"] .sheet-threat p {
+  line-height: 1.75;
+}
+.poster-sheet.sheet-portrait .sheet-title {
+  margin-bottom: 10px;
+}
+.poster-sheet.sheet-portrait .sheet-section + .sheet-section {
+  margin-top: 12px;
+  padding-top: 12px;
+}
