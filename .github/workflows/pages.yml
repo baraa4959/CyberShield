@@ -1,0 +1,49 @@
+name: Deploy GitHub Pages
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: true
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Tests
+        run: npm test
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Build static site
+        env:
+          PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL || format('https://{0}.github.io/{1}/', github.repository_owner, github.event.repository.name) }}
+          ENABLE_VISITOR_MODE: ${{ vars.ENABLE_VISITOR_MODE || 'true' }}
+          ENABLE_PRESENTATION_MODE: ${{ vars.ENABLE_PRESENTATION_MODE || 'true' }}
+          SHOW_UNIVERSITY_LOGO: ${{ vars.SHOW_UNIVERSITY_LOGO || 'true' }}
+          UNIVERSITY_LOGO_PATH: ${{ vars.UNIVERSITY_LOGO_PATH || 'branding/university-logo.svg' }}
+          POSTER_LOGO_PATH: ${{ vars.POSTER_LOGO_PATH || 'branding/university-logo-poster.svg' }}
+          SHOW_BRAND_NAME: ${{ vars.SHOW_BRAND_NAME || 'false' }}
+          POSTER_DURATION_SECONDS: ${{ vars.POSTER_DURATION_SECONDS || '180' }}
+          EXPERIENCE_IDLE_SECONDS: ${{ vars.EXPERIENCE_IDLE_SECONDS || '60' }}
+          SHOW_QR_AFTER_EXPERIENCE: ${{ vars.SHOW_QR_AFTER_EXPERIENCE || 'true' }}
+          BRAND_PRIMARY: ${{ vars.BRAND_PRIMARY || '#1c4379' }}
+          BRAND_SECONDARY: ${{ vars.BRAND_SECONDARY || '#28b6ba' }}
+          SITE_NAME: ${{ vars.SITE_NAME || 'CyberShield' }}
+          DEFAULT_LANGUAGE: ${{ vars.DEFAULT_LANGUAGE || 'ar' }}
+        run: npm run build
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+      - id: deployment
+        uses: actions/deploy-pages@v4

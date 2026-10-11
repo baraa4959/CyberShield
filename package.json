@@ -1,0 +1,27 @@
+{
+  "name": "cybershield-kiosk",
+  "version": "2.1.2",
+  "private": false,
+  "description": "Bilingual realistic mobile-security stories and one university-approved responsive infographic for awareness booths.",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/dev.mjs --dist",
+    "test": "node --test tests/*.test.mjs",
+    "check": "npm test && npm run build"
+  },
+  "keywords": [
+    "cybersecurity",
+    "kiosk",
+    "awareness",
+    "digital-signage",
+    "education",
+    "i18n",
+    "open-source"
+  ],
+  "type": "module"
+}

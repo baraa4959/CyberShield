@@ -1,0 +1,828 @@
+/* CyberShield approved infographic: an intentionally isolated print-style artboard.
+   At every viewport size JS scales a fixed 720x1280 or 1280x720 coordinate system.
+   Text is NOT independently resized, and all elements use consistent dimensions. */
+.poster-stage {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+  background: #f0f4f7;
+}
+.poster-sheet {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform-origin: center center;
+  background: white;
+  direction: rtl;
+  color: #24364c;
+  font-family: "Cairo", Tahoma, Arial, sans-serif;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px #dce7ed;
+}
+.poster-sheet * {
+  box-sizing: border-box;
+}
+.sheet-logo {
+  height: 104px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sheet-logo img {
+  display: block;
+  width: 400px;
+  height: 84px;
+  object-fit: contain;
+}
+.sheet-hero {
+  height: 165px;
+  background: var(--primary);
+  padding: 26px 44px 20px;
+  border-inline-start: 8px solid var(--secondary);
+  color: white;
+}
+.sheet-hero h1 {
+  font-size: 39px;
+  line-height: 1.52;
+  letter-spacing: -0.4px;
+  font-weight: 900;
+  margin: 0;
+  color: white;
+}
+.sheet-main {
+  height: 905px;
+  padding: 18px 42px 0;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+.sheet-section {
+  min-width: 0;
+  flex: none;
+}
+.sheet-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 13px;
+  min-height: 33px;
+}
+.sheet-count {
+  height: 30px;
+  width: 34px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--secondary);
+  font:
+    800 13px/1 "Cairo",
+    Arial,
+    sans-serif;
+  color: var(--primary);
+  direction: ltr;
+  flex: none;
+  text-align: center;
+}
+.sheet-count > span {
+  line-height: 1;
+  display: block;
+  position: relative;
+  top: 0;
+}
+.sheet-title h2 {
+  margin: 0;
+  font-size: 23px;
+  font-weight: 900;
+  color: var(--primary);
+  line-height: 1.35;
+}
+.sheet-threat-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 11px;
+}
+.sheet-threat {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  min-height: 117px;
+  border: 1.4px solid #dce7ed;
+  border-radius: 11px;
+  padding: 11px 12px 9px;
+  background: white;
+}
+.sheet-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  border: 1px solid #bce2e3;
+  background: #f0f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 42px;
+}
+.sheet-icon img {
+  display: block;
+  width: 23px;
+  height: 23px;
+  object-fit: contain;
+}
+.sheet-threat h3 {
+  margin: 1px 0 5px;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1.35;
+}
+.sheet-threat p {
+  margin: 0;
+  color: #24364c;
+  font-size: 14.7px;
+  font-weight: 600;
+  line-height: 2.2;
+}
+.sheet-section + .sheet-section {
+  border-top: 1.6px solid #dce7ed;
+  margin-top: 15px;
+  padding-top: 15px;
+}
+.sheet-warnings {
+  background: #f0f8f8;
+  border-radius: 10px;
+  padding: 12px 17px 14px;
+  margin-inline: -17px;
+}
+.sheet-section.sheet-warnings {
+  border-top: 0;
+  padding-top: 12px;
+}
+.sheet-warnings .sheet-title {
+  margin-bottom: 10px;
+}
+.sheet-warning-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 18px;
+  row-gap: 10px;
+}
+.sheet-warning {
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.45;
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+}
+.sheet-warning i,
+.sheet-action i {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--secondary);
+  margin-top: 8px;
+}
+.sheet-protect-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 25px;
+}
+.sheet-protect {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: 65px;
+  padding: 7px 0 8px;
+  border-bottom: 1px solid #dce7ed;
+}
+.sheet-protect:nth-last-child(-n + 2) {
+  border-bottom: 0;
+}
+.sheet-protect img {
+  width: 21px;
+  height: 21px;
+  flex: 0 0 21px;
+  margin-top: 3px;
+  object-fit: contain;
+}
+.sheet-protect strong {
+  display: block;
+  font-weight: 800;
+  font-size: 15.5px;
+  line-height: 1.4;
+  color: var(--primary);
+}
+.sheet-protect span {
+  display: block;
+  margin-top: 2px;
+  font-weight: 500;
+  color: #647487;
+  font-size: 13.3px;
+  line-height: 1.5;
+}
+.sheet-action-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 18px;
+  margin-top: 9px;
+}
+.sheet-action {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.58;
+  color: #24364c;
+}
+.sheet-footer {
+  height: 106px;
+  background: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 41px;
+  color: white;
+  gap: 25px;
+}
+.sheet-footer h2 {
+  font-size: 26px;
+  font-weight: 900;
+  margin: 0;
+  white-space: nowrap;
+  line-height: 1.5;
+  color: white;
+}
+.sheet-footer p {
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.7;
+  border-inline-start: 2px solid var(--secondary);
+  padding-inline-start: 18px;
+  margin: 0;
+  max-width: 257px;
+  color: white;
+}
+/* A deliberate 16:9 arrangement of the SAME approved content. */
+.sheet-landscape .sheet-logo {
+  height: 53px;
+}
+.sheet-landscape .sheet-logo img {
+  height: 43px;
+  width: 340px;
+}
+.sheet-landscape .sheet-hero {
+  height: 95px;
+  padding: 10px 42px 8px;
+}
+.sheet-landscape .sheet-hero h1 {
+  font-size: 29px;
+  line-height: 1.28;
+}
+.sheet-landscape .sheet-main {
+  height: 495px;
+  padding: 15px 35px 4px;
+  display: grid;
+  grid-template-columns: 1.04fr 0.96fr;
+  grid-template-rows: 315px 158px;
+  gap: 8px 22px;
+}
+.sheet-landscape .sheet-section + .sheet-section {
+  margin: 0;
+  padding-top: 0;
+  border: 0;
+}
+.sheet-landscape .sheet-section {
+  margin: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+.sheet-landscape .sheet-threats {
+  grid-column: 1;
+  grid-row: 1;
+}
+.sheet-landscape .sheet-warnings {
+  grid-column: 1;
+  grid-row: 2;
+  padding: 8px 15px;
+  margin-inline: 0;
+}
+.sheet-landscape .sheet-protection {
+  grid-column: 2;
+  grid-row: 1;
+}
+.sheet-landscape .sheet-response {
+  grid-column: 2;
+  grid-row: 2;
+  border-top: 1.6px solid #dce7ed !important;
+  padding-top: 10px !important;
+}
+.sheet-landscape .sheet-title {
+  min-height: 29px;
+  margin-bottom: 7px;
+  gap: 10px;
+}
+.sheet-landscape .sheet-title h2 {
+  font-size: 19px;
+}
+.sheet-landscape .sheet-count {
+  height: 26px;
+  width: 30px;
+  font-size: 12px;
+}
+.sheet-landscape .sheet-threat-grid {
+  gap: 7px;
+}
+.sheet-landscape .sheet-threat {
+  min-height: 124px;
+  padding: 8px 9px;
+  gap: 8px;
+}
+.sheet-landscape .sheet-icon {
+  width: 30px;
+  height: 30px;
+  flex-basis: 30px;
+  border-radius: 7px;
+}
+.sheet-landscape .sheet-icon img {
+  width: 18px;
+  height: 18px;
+}
+.sheet-landscape .sheet-threat h3 {
+  font-size: 13.5px;
+  margin: 0 0 2px;
+}
+.sheet-landscape .sheet-threat p {
+  font-size: 11px;
+  line-height: 2.2;
+}
+.sheet-landscape .sheet-warning {
+  font-size: 13px;
+  line-height: 1.4;
+}
+.sheet-landscape .sheet-warning-grid {
+  row-gap: 14px;
+  column-gap: 10px;
+}
+.sheet-landscape .sheet-protect-grid {
+  column-gap: 12px;
+}
+.sheet-landscape .sheet-protect {
+  min-height: 79px;
+  padding: 7px 0;
+}
+.sheet-landscape .sheet-protect img {
+  width: 17px;
+  height: 17px;
+  flex-basis: 17px;
+}
+.sheet-landscape .sheet-protect strong {
+  font-size: 12.8px;
+  line-height: 1.45;
+}
+.sheet-landscape .sheet-protect span {
+  font-size: 11px;
+  line-height: 1.55;
+}
+.sheet-landscape .sheet-action-grid {
+  gap: 11px;
+}
+.sheet-landscape .sheet-action {
+  font-size: 12.3px;
+  line-height: 1.65;
+}
+.sheet-landscape .sheet-footer {
+  height: 77px;
+  padding: 10px 38px;
+}
+.sheet-landscape .sheet-footer h2 {
+  font-size: 25px;
+}
+.sheet-landscape .sheet-footer p {
+  font-size: 13px;
+  max-width: 410px;
+}
+/* Accessible and unambiguous final decision review. */
+.review-screen {
+  max-width: 960px;
+  width: 100%;
+  padding: 24px clamp(16px, 3vw, 42px) 60px;
+}
+.review-lead {
+  padding: 26px 30px;
+  background: var(--primary);
+  color: white;
+  border-radius: 15px;
+  margin: 10px 0 25px;
+}
+.review-lead h1 {
+  color: white;
+  font-size: clamp(26px, 3vw, 38px);
+  margin: 6px 0;
+}
+.review-lead p {
+  line-height: 1.9;
+  font-size: 15px;
+  max-width: 750px;
+  color: white;
+}
+.review-overline {
+  font-size: 13px;
+  font-weight: 800;
+  opacity: 0.9;
+}
+.review-count {
+  display: inline-block;
+  border: 1px solid #ffffff70;
+  border-radius: 30px;
+  padding: 5px 14px;
+  margin-top: 17px;
+  font-size: 13px;
+}
+.review-section-heading {
+  font-size: clamp(19px, 2vw, 25px);
+  margin-bottom: 14px;
+  color: var(--primary);
+}
+.review-list {
+  margin: 0 0 25px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 310px), 1fr));
+  gap: 14px;
+}
+.review-item {
+  display: block;
+  border: 1px solid #dce7ed;
+  border-inline-start: 5px solid var(--secondary);
+  padding: 18px 20px;
+  background: #fff;
+}
+.review-item.review-risk {
+  border-inline-start-color: var(--primary);
+}
+.review-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.review-number {
+  display: grid;
+  place-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: var(--secondary);
+  color: var(--primary);
+  font: 800 12px/1 Arial;
+}
+.review-verdict {
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--primary);
+}
+.review-choice {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--primary);
+}
+.review-reason {
+  color: #485869;
+  font-size: 14px;
+  line-height: 1.9;
+  margin-top: 6px;
+}
+.security-tip {
+  background: #eef8f8;
+  border-inline-start: 5px solid var(--secondary);
+  padding: 20px 24px;
+  margin: 24px 0;
+  border-radius: 12px;
+}
+.security-tip span {
+  font-weight: 900;
+  color: var(--primary);
+  font-size: 17px;
+}
+.security-tip p {
+  color: #24364c;
+  font-size: 15px;
+  line-height: 1.95;
+  margin-top: 6px;
+}
+.qr-panel.large {
+  max-width: 100%;
+  width: 100%;
+  margin: 25px 0;
+  display: flex;
+  border: 2px solid var(--secondary);
+  padding: 25px;
+  gap: 22px;
+}
+.qr-panel.large .qr-picture {
+  width: 190px;
+  height: 190px;
+  padding: 8px;
+  display: grid;
+  place-items: center;
+}
+.qr-panel.large .qr-picture img {
+  width: 100%;
+  height: 100%;
+}
+.qr-panel.large .qr-copy strong {
+  font-size: clamp(21px, 2.4vw, 28px);
+}
+.qr-copy a {
+  display: block;
+  overflow-wrap: anywhere;
+  color: var(--primary);
+  font-size: 13px;
+  margin-top: 10px;
+}
+.qr-setup {
+  border: 1px dashed var(--secondary);
+  background: #f0f8f8;
+  padding: 22px;
+  border-radius: 12px;
+  margin: 25px 0;
+}
+.qr-setup strong {
+  color: var(--primary);
+}
+.qr-setup p {
+  line-height: 1.8;
+  margin-top: 8px;
+  color: #485869;
+}
+.review-more {
+  margin-top: 8px;
+  font-size: 15px;
+}
+@media (max-width: 640px) {
+  .review-screen {
+    padding: 18px 16px 60px;
+  }
+  .review-lead {
+    padding: 23px;
+  }
+  .qr-panel.large {
+    flex-direction: column;
+    text-align: center;
+  }
+  .qr-panel.large .qr-picture {
+    margin: auto;
+  }
+  .review-list {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .poster-sheet {
+    transition: none !important;
+  }
+}
+/* Direction is content-specific; the shared styling must not force English to RTL. */
+.poster-sheet[dir="ltr"] {
+  direction: ltr;
+  text-align: left;
+}
+.poster-sheet[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+/* English descriptions wrap longer than Arabic: compact only this portrait variant. */
+.poster-sheet[dir="ltr"].sheet-portrait .sheet-threat-grid {
+  gap: 9px;
+}
+.poster-sheet[dir="ltr"].sheet-portrait .sheet-threat {
+  min-height: 118px;
+  padding: 9px 10px;
+  gap: 9px;
+}
+.poster-sheet[dir="ltr"].sheet-portrait .sheet-threat h3 {
+  font-size: 15.5px;
+  margin-bottom: 3px;
+}
+.poster-sheet[dir="ltr"].sheet-portrait .sheet-threat p {
+  font-size: 13px;
+  line-height: 1.65;
+}
+.poster-sheet[dir="ltr"].sheet-portrait .sheet-warning {
+  font-size: 14px;
+  line-height: 1.4;
+}
+.poster-sheet[dir="ltr"].sheet-portrait .sheet-warnings {
+  padding-block: 9px;
+}
+.poster-sheet[dir="ltr"].sheet-portrait .sheet-protect {
+  min-height: 62px;
+  padding-block: 6px;
+}
+.poster-sheet[dir="ltr"].sheet-portrait .sheet-title h2 {
+  font-size: 22px;
+}
+.poster-sheet[dir="ltr"].sheet-portrait .sheet-action-grid {
+  gap: 12px;
+}
+.poster-sheet[dir="ltr"].sheet-portrait .sheet-action {
+  font-size: 13px;
+}
+/* Rotated digital signage uses the transformed stage, not the device's native dvh. */
+.stage.force-landscape .poster-stage,
+.stage.force-portrait .poster-stage {
+  height: 100%;
+  width: 100%;
+}
+
+/* v2.1.2 — the poster is a viewport, not a document that may expand with content.
+   These constraints also apply on the first portrait render before any resize event. */
+html:has(.shell-poster),
+body:has(.shell-poster),
+#app:has(.shell-poster) {
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
+}
+#app:has(.shell-poster) > .stage {
+  height: 100dvh;
+  min-height: 0;
+  overflow: hidden;
+}
+/* A forced orientation only exchanges axes when the physical screen differs. */
+@media (orientation: portrait) {
+  #app:has(.shell-poster) > .stage.force-landscape {
+    height: 100vw;
+  }
+}
+@media (orientation: landscape) {
+  #app:has(.shell-poster) > .stage.force-portrait {
+    height: 100vw;
+  }
+}
+#app:has(.shell-poster) > .stage > .app-shell.shell-poster {
+  height: 100%;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  flex: 1 1 auto;
+  display: block;
+}
+.stage.force-landscape:has(.shell-poster),
+.stage.force-portrait:has(.shell-poster) {
+  overflow: hidden;
+}
+.stage.force-landscape .shell-poster,
+.stage.force-portrait .shell-poster {
+  height: 100%;
+  min-height: 0;
+}
+.stage.force-landscape .shell-poster .poster-stage,
+.stage.force-portrait .shell-poster .poster-stage {
+  height: 100%;
+  min-height: 0;
+}
+/* Use an artboard-relative layout in landscape instead of large unequal empty blocks. */
+.sheet-landscape .sheet-main {
+  grid-template-columns: minmax(0, 1.02fr) minmax(0, 0.98fr);
+  grid-template-rows: 300px 154px;
+  gap: 14px 24px;
+  padding: 15px 36px 12px;
+}
+.sheet-landscape .sheet-title {
+  min-height: 30px;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.sheet-landscape .sheet-title h2 {
+  font-size: 19.5px;
+  line-height: 1.3;
+}
+.sheet-landscape .sheet-count {
+  height: 29px;
+  width: 33px;
+  font-size: 13px;
+}
+.sheet-landscape .sheet-threat-grid {
+  height: 247px;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 9px;
+}
+.sheet-landscape .sheet-threat {
+  height: 100%;
+  min-height: 0;
+  padding: 10px;
+  gap: 10px;
+  border-radius: 9px;
+}
+.sheet-landscape .sheet-icon {
+  width: 33px;
+  height: 33px;
+  flex-basis: 33px;
+  border-radius: 8px;
+}
+.sheet-landscape .sheet-icon img {
+  width: 19px;
+  height: 19px;
+}
+.sheet-landscape .sheet-threat h3 {
+  font-size: 15px;
+  line-height: 1.34;
+  margin: 0 0 4px;
+}
+.sheet-landscape .sheet-threat p {
+  font-size: 12px;
+  line-height: 1.85;
+  font-weight: 600;
+}
+.sheet-landscape[dir="rtl"] .sheet-threat p {
+  line-height: 2.2;
+}
+.sheet-landscape .sheet-protect-grid {
+  height: 250px;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
+  column-gap: 17px;
+}
+.sheet-landscape .sheet-protect {
+  min-height: 0;
+  padding: 10px 0 8px;
+  gap: 9px;
+}
+.sheet-landscape .sheet-protect img {
+  width: 19px;
+  height: 19px;
+  flex-basis: 19px;
+  margin-top: 2px;
+}
+.sheet-landscape .sheet-protect strong {
+  font-size: 14px;
+  line-height: 1.4;
+}
+.sheet-landscape .sheet-protect span {
+  font-size: 12px;
+  line-height: 1.55;
+  margin-top: 5px;
+}
+.sheet-landscape .sheet-warnings {
+  padding: 10px 16px;
+  margin-inline: 0;
+  border-radius: 10px;
+}
+.sheet-landscape .sheet-warnings .sheet-title {
+  margin-bottom: 8px;
+}
+.sheet-landscape .sheet-warning-grid {
+  column-gap: 14px;
+  row-gap: 12px;
+}
+.sheet-landscape .sheet-warning {
+  font-size: 13.5px;
+  line-height: 1.55;
+  gap: 8px;
+}
+.sheet-landscape .sheet-warning i {
+  margin-top: 8px;
+}
+.sheet-landscape .sheet-response {
+  padding-top: 10px !important;
+  border-top: 1.6px solid #dce7ed !important;
+}
+.sheet-landscape .sheet-response .sheet-title {
+  margin-bottom: 9px;
+}
+.sheet-landscape .sheet-action-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px 20px;
+  margin-top: 0;
+}
+.sheet-landscape .sheet-action {
+  font-size: 13px;
+  line-height: 1.55;
+  gap: 9px;
+}
+.sheet-landscape .sheet-action:last-child {
+  grid-column: 1/-1;
+}
+.sheet-landscape .sheet-footer {
+  padding: 11px 38px;
+  gap: 25px;
+}
+.sheet-landscape .sheet-footer h2 {
+  font-size: 25px;
+}
+.sheet-landscape .sheet-footer p {
+  font-size: 12.8px;
+  line-height: 1.65;
+  max-width: 440px;
+}
+/* Long English labels are given space without shrinking their neighbors. */
+.sheet-landscape[dir="ltr"] .sheet-threat p {
+  line-height: 1.7;
+}
+.sheet-landscape[dir="ltr"] .sheet-action {
+  font-size: 12.7px;
+}
