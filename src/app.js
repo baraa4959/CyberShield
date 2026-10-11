@@ -297,10 +297,43 @@ function posterScreen() {
   const second = `<section class="sheet-section sheet-warnings">${title(2, d.sections[1].title)}<div class="sheet-warning-grid">${d.sections[1].bullets.map((b) => `<div class="sheet-warning"><i></i><span>${safe(b)}</span></div>`).join("")}</div></section>`;
   const third = `<section class="sheet-section sheet-protection">${title(3, d.sections[2].title)}<div class="sheet-protect-grid">${d.sections[2].cards.map(([heading, body]) => `<div class="sheet-protect"><img src="assets/icons/circle-check.svg" alt=""/><div><strong>${safe(heading)}</strong><span>${safe(body)}</span></div></div>`).join("")}</div></section>`;
   const fourth = `<section class="sheet-section sheet-response">${title(4, d.sections[3].title)}<div class="sheet-action-grid">${d.sections[3].bullets.map((b) => `<div class="sheet-action"><i></i><span>${safe(b)}</span></div>`).join("")}</div></section>`;
-  return `<div class="poster-stage" aria-label="${safe(label("إنفوجرافيك السلامة الرقمية", "Digital safety infographic"))}"><main class="poster-sheet" id="poster-sheet" dir="${content().dir}"><div class="sheet-logo">${state.config.showUniversityLogo ? `<img src="${safe(state.config.posterLogoPath)}" alt="${safe(label("شعار الجامعة", "University logo"))}" onerror="this.style.display='none'"/>` : ""}</div><header class="sheet-hero"><h1>${safe(d.heading[0])}<br>${safe(d.heading[1])}</h1></header><div class="sheet-main">${first}${second}${third}${fourth}</div><footer class="sheet-footer"><h2>${safe(d.footer)}</h2><p>${safe(d.footnote)}</p></footer></main></div>`;
+  return `<div class="poster-stage" aria-label="${safe(label("إنفوجرافيك السلامة الرقمية", "Digital safety infographic"))}"><main class="poster-sheet" id="poster-sheet" dir="${content().dir}"><div class="sheet-logo">${state.config.showUniversityLogo ? `<img src="${safe(state.config.posterLogoPath)}" alt="${safe(label("شعار الجامعة", "University logo"))}" onerror="this.style.display='none'"/>` : ""}</div><header class="sheet-hero"><h1>${safe(d.heading[0])}<br>${safe(d.heading[1])}</h1></header><div class="sheet-main"><div class="sheet-main-content">${first}${second}${third}${fourth}</div></div><footer class="sheet-footer"><h2>${safe(d.footer)}</h2><p>${safe(d.footnote)}</p></footer></main></div>`;
 }
 let posterObserver = null;
 let posterFrame = 0;
+function fitPortraitPosterText(sheet, landscape) {
+  const content = sheet.querySelector(".sheet-main-content");
+  if (!content) return;
+  // Recheck natural text height after resizing, switching language, or loading fonts.
+  content.style.removeProperty("width");
+  content.style.removeProperty("transform");
+  if (landscape) return;
+  const main = sheet.querySelector(".sheet-main");
+  const computed = getComputedStyle(main);
+  const available =
+    main.clientHeight -
+    (parseFloat(computed.paddingTop) || 0) -
+    (parseFloat(computed.paddingBottom) || 0) -
+    1;
+  if (available <= 0 || content.scrollHeight <= available) return;
+
+  // Scale both axes equally, allowing text to rewrap in the wider layout box.
+  // Unlike clipped fixed-height cards, every section remains visible.
+  const applyScale = (scale) => {
+    content.style.width = 100 / scale + "%";
+    content.style.transform = "scale(" + scale + ")";
+  };
+  // Layout coordinates also work when the whole kiosk stage is rotated.
+  let low = 0.1;
+  let high = 1;
+  for (let i = 0; i < 14; i++) {
+    const candidate = (low + high) / 2;
+    applyScale(candidate);
+    if (content.scrollHeight * candidate <= available) low = candidate;
+    else high = candidate;
+  }
+  applyScale(low);
+}
 function fitPoster() {
   const sheet = document.getElementById("poster-sheet");
   if (!sheet) return;
@@ -317,6 +350,7 @@ function fitPoster() {
   sheet.style.width = `${layout.artboardWidth}px`;
   sheet.style.height = `${layout.artboardHeight}px`;
   sheet.style.transform = `translate(-50%,-50%) scale(${layout.scale})`;
+  fitPortraitPosterText(sheet, layout.landscape);
 }
 function schedulePosterFit() {
   if (state.mode !== "poster") return;
