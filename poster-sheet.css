@@ -852,3 +852,10 @@ body:has(.shell-poster),
   margin-top: 12px;
   padding-top: 12px;
 }
+
+/* In kiosk presentation, conceal the pointer while the infographic is visible.
+   The rule stops applying as soon as the app switches to interactive screens. */
+.stage:has(.shell-poster),
+.stage:has(.shell-poster) * {
+  cursor: none !important;
+}
