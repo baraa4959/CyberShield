@@ -74,3 +74,13 @@ test("poster viewport is bounded rather than content-sized", () => {
   assert.match(app, /new ResizeObserver\(schedulePosterFit\)/);
   assert.match(app, /document\.fonts\.ready\.then\(schedulePosterFit\)/);
 });
+
+test("portrait sections are fitted inside the artboard, preserving the final section", () => {
+  const css = fs.readFileSync(new URL("../poster-sheet.css", import.meta.url), "utf8");
+  const app = fs.readFileSync(new URL("../src/app.js", import.meta.url), "utf8");
+  assert.match(css, /\.poster-sheet\.sheet-portrait \.sheet-main-content/);
+  assert.match(app, /class="sheet-main-content"/);
+  assert.match(app, /function fitPortraitPosterText\(sheet, landscape\)/);
+  assert.match(app, /content\.scrollHeight \* candidate <= available/);
+  assert.match(app, /fitPortraitPosterText\(sheet, layout\.landscape\)/);
+});
