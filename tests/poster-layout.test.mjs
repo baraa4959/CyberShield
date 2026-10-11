@@ -37,6 +37,22 @@ test("explicit orientation and zero-sized early layouts are handled", () => {
   assert.equal(measurePosterLayout(0, 800), null);
 });
 
+// Assert the actual CSS declarations, not minified whitespace formatting.
+// Formatting the stylesheet must not break the GitHub Pages deployment.
+function declarationsFor(css, selector) {
+  const escaped = selector.replace(/[.*+?^$()|[\]{}\\]/g, "\\$&").replace(/\s+>\s+/g, "\\s*>\\s*");
+  const rule = css.match(new RegExp(escaped + "\\s*\\{([^}]*)\\}", "s"));
+  assert.ok(rule, "Expected CSS rule for " + selector);
+  return rule[1];
+}
+
+function assertDeclaration(cssBlock, property, value) {
+  const pattern = new RegExp(
+    "(?:^|;)\\s*" + property + "\\s*:\\s*" + value + "\\s*(?:;|$)",
+  );
+  assert.match(cssBlock, pattern, "Expected " + property + ": " + value);
+}
+
 test("poster viewport is bounded rather than content-sized", () => {
   const css = fs.readFileSync(
     new URL("../poster-sheet.css", import.meta.url),
@@ -46,10 +62,15 @@ test("poster viewport is bounded rather than content-sized", () => {
     new URL("../src/app.js", import.meta.url),
     "utf8",
   );
-  assert.match(css, /html:has\(\.shell-poster\), body:has\(\.shell-poster\)/);
-  assert.match(css, /#app:has\(\.shell-poster\) > \.stage\{/);
-  assert.match(css, /height:100dvh;min-height:0;overflow:hidden/);
-  assert.match(css, /\.poster-stage\{width:100%;height:100%;min-height:0/);
+  assert.match(css, /html:has\(\.shell-poster\),\s*body:has\(\.shell-poster\)/);
+  const stage = declarationsFor(css, "#app:has(.shell-poster) > .stage");
+  assertDeclaration(stage, "height", "100dvh");
+  assertDeclaration(stage, "min-height", "0");
+  assertDeclaration(stage, "overflow", "hidden");
+  const poster = declarationsFor(css, ".poster-stage");
+  assertDeclaration(poster, "width", "100%");
+  assertDeclaration(poster, "height", "100%");
+  assertDeclaration(poster, "min-height", "0");
   assert.match(app, /new ResizeObserver\(schedulePosterFit\)/);
   assert.match(app, /document\.fonts\.ready\.then\(schedulePosterFit\)/);
 });
